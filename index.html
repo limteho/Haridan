@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INTEGRITYLINE | Internal Complaint &amp; Whistleblowing Portal — Haridan Corporate Solutions Sdn. Bhd.</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              DEFAULT: '#0D1C42',
+              light: '#162B5E',
+              dark: '#08122B',
+              soft: '#EEF2F9'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #F4F6F9;
+      color: #1E293B;
+    }
+    .nav-link {
+      position: relative;
+      transition: color 0.15s ease;
+    }
+    .nav-link.active {
+      color: #0D1C42;
+      font-weight: 600;
+    }
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 2px;
+      background-color: #0D1C42;
+      border-radius: 1px;
+    }
+    .form-input {
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: #0D1C42;
+      box-shadow: 0 0 0 3px rgba(13, 28, 66, 0.12);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+  <!-- Top Utility Bar -->
+  <div class="bg-[#0D1C42] text-white text-xs py-1.5 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-4">
+        <span class="flex items-center gap-1.5 text-slate-200">
+          <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          Encrypted Internal Portal &bull; 256-bit SSL
+        </span>
+        <span class="hidden sm:inline text-slate-400">|</span>
+        <span class="hidden sm:inline text-slate-300">Haridan Corporate Solutions Sdn. Bhd. (199801024512)</span>
+      </div>
+      <div class="flex items-center gap-3 text-slate-300">
+        <span>Integrity Hotline: <strong class="text-white font-medium">+603-7890 4400</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-center justify-between h-16">
+        <!-- Brand Logo & Portal Name -->
+        <button type="button" id="brandHomeBtn" class="flex items-center gap-3 text-left focus:outline-none">
+          <div class="w-10 h-10 rounded-lg bg-[#0D1C42] flex items-center justify-center shrink-0 shadow-sm">
+            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 4v5c0 5.25-3.5 9.74-8 11-4.5-1.26-8-5.75-8-11V7l8-4z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-lg font-extrabold tracking-tight text-[#0D1C42]">HARIDAN</span>
+              <span class="text-[10px] font-semibold uppercase tracking-wider bg-slate-100 text-[#0D1C42] border border-slate-300 px-2 py-0.5 rounded">INTEGRITYLINE</span>
+            </div>
+            <p class="text-[11px] text-slate-500 font-medium leading-tight">Internal Complaint &amp; Whistleblowing Portal</p>
+          </div>
+        </button>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600" aria-label="Primary Navigation">
+          <button type="button" data-nav="home" class="nav-link active py-5 hover:text-[#0D1C42]">Home</button>
+          <button type="button" data-nav="about" class="nav-link py-5 hover:text-[#0D1C42]">About Integrity</button>
+          <button type="button" data-nav="submit" class="nav-link py-5 hover:text-[#0D1C42]">Submit a Complaint</button>
+          <button type="button" data-nav="track" class="nav-link py-5 hover:text-[#0D1C42]">Track Complaint</button>
+          <button type="button" data-nav="contact" class="nav-link py-5 hover:text-[#0D1C42]">Contact</button>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button type="button" id="mobileMenuBtn" class="md:hidden p-2 rounded-md text-slate-600 hover:bg-slate-100 hover:text-[#0D1C42]" aria-label="Toggle Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobileMenu" class="hidden md:hidden pb-3 pt-1 border-t border-slate-100 space-y-1">
+        <button type="button" data-nav="home" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-[#0D1C42] bg-slate-100">Home</button>
+        <button type="button" data-nav="about" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:bg-slate-50">About Integrity</button>
+        <button type="button" data-nav="submit" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:bg-slate-50">Submit a Complaint</button>
+        <button type="button" data-nav="track" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:bg-slate-50">Track Complaint</button>
+        <button type="button" data-nav="contact" class="block w-full text-left px-3 py-2 rounded-md text-sm font-medium text-slate-600 hover:bg-slate-50">Contact</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-1">
+
+    <!-- VIEW: HOME / SUBMIT A COMPLAINT (Default) -->
+    <section id="view-portal" class="block">
+      <!-- Compact Corporate Hero Banner -->
+      <div class="bg-[#0D1C42] text-white border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-7 lg:py-8">
+          <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+            <div class="max-w-3xl">
+              <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                Corporate Governance &amp; Ethics Channel
+              </div>
+              <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">
+                SPEAK UP. DO THE RIGHT THING.
+              </h1>
+              <p class="mt-2.5 text-sm sm:text-base text-slate-200 leading-relaxed max-w-2xl">
+                Your voice matters. Report suspected misconduct, bribery, corruption or unethical behaviour through our confidential reporting channel.
+              </p>
+            </div>
+            <div class="shrink-0 flex items-center gap-3 bg-white/10 border border-white/15 rounded-lg px-4 py-3 text-xs text-slate-200">
+              <svg class="w-5 h-5 text-slate-200 shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <div>
+                <div class="font-semibold text-white">Portal Reference</div>
+                <div class="text-slate-300">HCSB-WHISTLE-2026</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Three Information Cards -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 -mt-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Card 1 -->
+          <div class="bg-white rounded-lg border border-slate-200 p-5 shadow-sm flex items-start gap-3.5">
+            <div class="w-10 h-10 rounded-md bg-[#EEF2F9] text-[#0D1C42] flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <div>
+              <h2 class="text-sm font-bold text-[#0D1C42]">Confidential Reporting</h2>
+              <p class="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">Your report will be handled with care and discretion.</p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white rounded-lg border border-slate-200 p-5 shadow-sm flex items-start gap-3.5">
+            <div class="w-10 h-10 rounded-md bg-[#EEF2F9] text-[#0D1C42] flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <div>
+              <h2 class="text-sm font-bold text-[#0D1C42]">Protection Against Retaliation</h2>
+              <p class="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">Employees are encouraged to report concerns in good faith.</p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white rounded-lg border border-slate-200 p-5 shadow-sm flex items-start gap-3.5">
+            <div class="w-10 h-10 rounded-md bg-[#EEF2F9] text-[#0D1C42] flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+              </svg>
+            </div>
+            <div>
+              <h2 class="text-sm font-bold text-[#0D1C42]">Fair Investigation</h2>
+              <p class="mt-1 text-xs sm:text-sm text-slate-600 leading-relaxed">Every complaint will be reviewed and handled according to company procedures.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complaint Submission Form Section -->
+      <div id="complaint-form-section" class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+        <div class="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+          <!-- Form Header -->
+          <div class="px-6 py-4 border-b border-slate-200 bg-slate-50 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-sm bg-[#0D1C42]"></span>
+              <div>
+                <h2 class="text-base font-bold text-[#0D1C42]">Internal Complaint Submission Form</h2>
+                <p class="text-xs text-slate-500">All fields marked with <span class="text-red-600 font-semibold">*</span> are required for case assessment. Identity fields remain strictly optional.</p>
+              </div>
+            </div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-white border border-slate-200 px-3 py-1 rounded-full">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Direct to Integrity &amp; Compliance Unit
+            </span>
+          </div>
+
+          <!-- Form Body -->
+          <form id="complaintForm" class="p-6 space-y-5" novalidate>
+            <!-- Row 1: Reporter Details (Optional) & Department -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label for="fullName" class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-1.5">
+                  Full Name <span class="text-slate-400 font-normal normal-case">(optional)</span>
+                </label>
+                <input
+                  type="text"
+                  id="fullName"
+                  name="fullName"
+                  value="Alya"
+                  placeholder="Leave blank to remain anonymous"
+                  class="form-input w-full rounded-md border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-800 placeholder-slate-400"
+                />
+              </div>
+
+              <div>
+                <label for="employeeId" class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-1.5">
+                  Employee ID <span class="text-slate-400 font-normal normal-case">(optional)</span>
+                </label>
+                <input
+                  type="text"
+                  id="employeeId"
+                  name="employeeId"
+                  value="HCS-1042"
+                  placeholder="e.g. HCS-1042"
+                  class="form-input w-full rounded-md border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-800 placeholder-slate-400"
+                />
+              </div>
+
+              <div>
+                <label for="department" class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-1.5">
+                  Department <span class="text-red-600">*</span>
+                </label>
+                <select
+                  id="department"
+                  name="department"
+                  required
+                  class="form-input w-full rounded-md border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-800"
+                >
+                  <option value="">Select department</option>
+                  <option value="Procurement & Vendor Management" selected>Procurement &amp; Vendor Management</option>
+                  <option value="Finance & Accounts">Finance &amp; Accounts</option>
+                  <option value="Operations & Project Delivery">Operations &amp; Project Delivery</option>
+                  <option value="Human Resources & Administration">Human Resources &amp; Administration</option>
+                  <option value="Information Technology">Information Technology</option>
+                  <option value="Sales & Business Development">Sales &amp; Business Development</option>
+                  <option value="Legal & Compliance">Legal &amp; Compliance</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Row 2: Complaint Type, Person(s) Involved, Date, Location -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <label for="complaintType" class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-1.5">
+                  Type of Complaint <span class="text-red-600">*</span>
+                </label>
+                <select
+                  id="complaintType"
+                  name="complaintType"
+                  required
+                  class="form-input w-full rounded-md border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-800 font-medium"
+                >
+                  <option value="">Select category</option>
+                  <option value="Bribery and Corruption" selected>Bribery and Corruption</option>
+                  <option value="Conflict of Interest">Conflict of Interest</option>
+                  <option value="Fraud">Fraud</option>
+                  <option value="Misconduct">Misconduct</option>
+                  <option value="Abuse of Authority">Abuse of Authority</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="personsInvolved" class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-1.5">
+                  Person(s) Involved <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="personsInvolved"
+                  name="personsInvolved"
+                  required
+                  value="Dina (Employee) and Nik (Supplier Representative)"
+                  placeholder="Name(s) and role(s)"
+                  class="form-input w-full rounded-md border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-800"
+                />
+              </div>
+
+              <div>
+                <label for="incidentDate" class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-1.5">
+                  Date of Incident <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="date"
+                  id="incidentDate"
+                  name="incidentDate"
+                  required
+                  value="2026-11-16"
+                  class="form-input w-full rounded-md border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-800"
+                />
+              </div>
+
+              <div>
+                <label for="incidentLocation" class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-1.5">
+                  Location of Incident <span class="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="incidentLocation"
+                  name="incidentLocation"
+                  required
+                  value="Haridan Corporate HQ, Level 3 – Meeting Room B"
+                  placeholder="Building, floor, or site"
+                  class="form-input w-full rounded-md border border-slate-300 bg-white px-3.5 py-2 text-sm text-slate-800"
+                />
+              </div>
+            </div>
+
+            <!-- Row 3: Description & Supporting Evidence side-by-side on desktop -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+              <div class="lg:col-span-2">
+                <label for="description" class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-1.5">
+                  Description of Incident <span class="text-red-600">*</span>
+                </label>
+                <textarea
+                  id="description"
+                  name="description"
+                  rows="5"
+                  required
+                  placeholder="Provide a clear, factual account of what occurred, including relevant dates, individuals, and context..."
+                  class="form-input w-full rounded-md border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-800 leading-relaxed"
+                >I would like to report a suspected bribery incident involving an employee and a supplier representative. I witnessed a money envelope being handed to an employee in connection with a supplier selection process for a company project. I believe this matter should be reviewed and investigated.</textarea>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wide text-slate-700 mb-1.5">
+                  Supporting Evidence <span class="text-slate-400 font-normal normal-case">(optional)</span>
+                </label>
+                <div
+                  id="dropZone"
+                  class="border-2 border-dashed border-slate-300 rounded-md bg-slate-50 hover:bg-slate-100/80 hover:border-[#0D1C42]/50 transition-colors p-4 text-center cursor-pointer flex flex-col items-center justify-center min-h-[132px]"
+                >
+                  <input type="file" id="evidenceInput" class="hidden" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.mp4,.wav" />
+                  <svg class="w-7 h-7 text-slate-400 mb-1.5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  </svg>
+                  <p class="text-xs font-medium text-slate-700">
+                    <span class="text-[#0D1C42] font-semibold underline">Click to upload</span> or drag and drop
+                  </p>
+                  <p class="text-[11px] text-slate-500 mt-1">PDF, JPG, PNG, DOCX (Max 25 MB per file)</p>
+                </div>
+                <ul id="fileList" class="mt-2 space-y-1.5 text-xs"></ul>
+              </div>
+            </div>
+
+            <!-- Declaration & Submit Row -->
+            <div class="pt-3 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <label class="inline-flex items-start gap-2.5 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    id="confirmAccuracy"
+                    checked
+                    class="mt-0.5 h-4 w-4 rounded border-slate-300 text-[#0D1C42] focus:ring-[#0D1C42]"
+                  />
+                  <span class="text-sm text-slate-700">
+                    I confirm that the information provided is accurate to the best of my knowledge.
+                  </span>
+                </label>
+                <p id="formError" class="hidden mt-1.5 text-xs font-medium text-red-600"></p>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <button
+                  type="button"
+                  id="resetFormBtn"
+                  class="px-4 py-2.5 rounded-md border border-slate-300 bg-white text-xs font-semibold uppercase tracking-wide text-slate-700 hover:bg-slate-50 transition-colors"
+                >
+                  Clear Form
+                </button>
+                <button
+                  type="submit"
+                  class="px-6 py-2.5 rounded-md bg-[#0D1C42] hover:bg-[#162B5E] text-white text-sm font-bold tracking-wide shadow-sm transition-colors flex items-center gap-2"
+                >
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  SUBMIT COMPLAINT
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: ABOUT INTEGRITY -->
+    <section id="view-about" class="hidden max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+        <div class="border-b border-slate-200 pb-4">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#0D1C42]">Corporate Governance Framework</span>
+          <h1 class="text-2xl font-bold text-[#0D1C42] mt-1">About Integrity &amp; Whistleblowing Policy</h1>
+          <p class="text-sm text-slate-600 mt-2 max-w-3xl">
+            Haridan Corporate Solutions Sdn. Bhd. maintains a zero-tolerance stance against bribery, corruption, fraud, and unethical conduct in line with Malaysian corporate governance standards and internal compliance procedures.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="border border-slate-200 rounded-lg p-5 bg-slate-50">
+            <h2 class="text-sm font-bold text-[#0D1C42] mb-2">Scope of Reportable Conduct</h2>
+            <ul class="text-sm text-slate-600 space-y-1.5 list-disc list-inside">
+              <li>Offering, giving, receiving, or soliciting any gratification or bribe</li>
+              <li>Undisclosed conflicts of interest in vendor or supplier selection</li>
+              <li>Misappropriation of company funds, assets, or procurement records</li>
+              <li>Abuse of authority, intimidation, or workplace misconduct</li>
+            </ul>
+          </div>
+
+          <div class="border border-slate-200 rounded-lg p-5 bg-slate-50">
+            <h2 class="text-sm font-bold text-[#0D1C42] mb-2">Whistleblower Safeguards</h2>
+            <ul class="text-sm text-slate-600 space-y-1.5 list-disc list-inside">
+              <li>Optional anonymous submission without mandatory identity fields</li>
+              <li>Restricted access limited to authorised Integrity &amp; Compliance officers</li>
+              <li>Strict prohibition against retaliation, demotion, or harassment</li>
+              <li>Objective fact-finding and documented review for every submission</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-2">
+          <button type="button" data-nav="submit" class="px-5 py-2.5 rounded-md bg-[#0D1C42] hover:bg-[#162B5E] text-white text-sm font-semibold transition-colors">
+            Proceed to Submit a Complaint
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: TRACK COMPLAINT -->
+    <section id="view-track" class="hidden max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+        <div class="border-b border-slate-200 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <span class="text-xs font-semibold uppercase tracking-wider text-[#0D1C42]">Case Status Lookup</span>
+            <h1 class="text-2xl font-bold text-[#0D1C42] mt-1">Track Complaint</h1>
+            <p class="text-sm text-slate-600 mt-1">Enter your assigned Reference ID to check the current review stage.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <input
+              type="text"
+              id="trackInput"
+              value="INT-2026-0841"
+              placeholder="e.g. INT-2026-0841"
+              class="form-input rounded-md border border-slate-300 px-3.5 py-2 text-sm font-mono text-slate-800 w-44"
+            />
+            <button type="button" id="trackBtn" class="px-4 py-2 rounded-md bg-[#0D1C42] hover:bg-[#162B5E] text-white text-sm font-semibold transition-colors">
+              Check Status
+            </button>
+          </div>
+        </div>
+
+        <div id="trackResult" class="border border-slate-200 rounded-lg p-5 bg-slate-50">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW: CONTACT -->
+    <section id="view-contact" class="hidden max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <div class="bg-white rounded-lg border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+        <div class="border-b border-slate-200 pb-4">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#0D1C42]">Integrity &amp; Compliance Unit</span>
+          <h1 class="text-2xl font-bold text-[#0D1C42] mt-1">Contact Governance Office</h1>
+          <p class="text-sm text-slate-600 mt-1">Reach our dedicated compliance team for confidential inquiries or physical document submission.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div class="border border-slate-200 rounded-lg p-5">
+            <h2 class="text-sm font-bold text-[#0D1C42]">Dedicated Integrity Hotline</h2>
+            <p class="text-lg font-semibold text-slate-800 mt-2">+603-7890 4400</p>
+            <p class="text-xs text-slate-500 mt-1">Monday &ndash; Friday, 8:30 AM &ndash; 5:30 PM (MYT)</p>
+          </div>
+
+          <div class="border border-slate-200 rounded-lg p-5">
+            <h2 class="text-sm font-bold text-[#0D1C42]">Confidential Email</h2>
+            <p class="text-sm font-semibold text-slate-800 mt-2">integrity@haridancorp.com.my</p>
+            <p class="text-xs text-slate-500 mt-1">Monitored exclusively by the Integrity &amp; Compliance Committee</p>
+          </div>
+
+          <div class="border border-slate-200 rounded-lg p-5">
+            <h2 class="text-sm font-bold text-[#0D1C42]">Corporate Headquarters</h2>
+            <p class="text-sm text-slate-700 mt-2">Level 12, Menara Haridan, Jalan Semantan, 50490 Kuala Lumpur, Malaysia</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Submission Confirmation Modal -->
+  <div id="confirmationModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-[1px] flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg border border-slate-200 shadow-xl max-w-lg w-full overflow-hidden">
+      <div class="bg-[#0D1C42] px-6 py-4 flex items-center justify-between text-white">
+        <div class="flex items-center gap-2.5">
+          <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h3 class="text-base font-bold">Complaint Successfully Recorded</h3>
+        </div>
+        <button type="button" id="closeModalX" class="text-slate-300 hover:text-white text-xl leading-none" aria-label="Close">&times;</button>
+      </div>
+      <div class="p-6 space-y-4">
+        <p class="text-sm text-slate-600">
+          Your report has been securely logged into the <strong>INTEGRITYLINE</strong> system for review by the Integrity &amp; Compliance Unit.
+        </p>
+        <div class="bg-slate-50 border border-slate-200 rounded-md p-4 space-y-2 text-sm">
+          <div class="flex justify-between">
+            <span class="text-slate-500">Reference Number:</span>
+            <span id="modalRefId" class="font-mono font-bold text-[#0D1C42]">INT-2026-0842</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Category:</span>
+            <span id="modalCategory" class="font-semibold text-slate-800">Bribery and Corruption</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Submitted On:</span>
+            <span id="modalTimestamp" class="text-slate-700">17 Nov 2026, 09:51 MYT</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-slate-500">Current Status:</span>
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-amber-100 text-amber-800">Received &ndash; Pending Review</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button type="button" id="modalTrackBtn" class="px-4 py-2 rounded-md border border-[#0D1C42] text-[#0D1C42] text-sm font-semibold hover:bg-slate-50">
+            Track This Complaint
+          </button>
+          <button type="button" id="modalCloseBtn" class="px-5 py-2 rounded-md bg-[#0D1C42] hover:bg-[#162B5E] text-white text-sm font-semibold">
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-[#0D1C42] text-slate-300 border-t border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+      <div class="text-center sm:text-left">
+        <p class="font-bold text-white tracking-wide">HARIDAN CORPORATE SOLUTIONS SDN. BHD.</p>
+        <p class="text-slate-300 mt-0.5">Integrity starts with us.</p>
+      </div>
+      <p class="text-slate-400 text-center sm:text-right">
+        All reports are subject to review and investigation in accordance with company procedures.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const views = {
+        portal: document.getElementById('view-portal'),
+        about: document.getElementById('view-about'),
+        track: document.getElementById('view-track'),
+        contact: document.getElementById('view-contact')
+      };
+
+      const navButtons = document.querySelectorAll('[data-nav]');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const brandHomeBtn = document.getElementById('brandHomeBtn');
+
+      // Sample case records for Track Complaint
+      const caseStore = {
+        'INT-2026-0841': {
+          id: 'INT-2026-0841',
+          category: 'Conflict of Interest',
+          department: 'Operations & Project Delivery',
+          submitted: '12 Nov 2026, 14:22 MYT',
+          status: 'Under Investigation',
+          handler: 'Ely (Company Manager & Compliance Lead)',
+          notes: 'Preliminary documentation verified. Assigned for formal internal review.'
+        }
+      };
+
+      let latestSubmittedId = 'INT-2026-0841';
+
+      function switchView(target) {
+        Object.keys(views).forEach((k) => views[k].classList.add('hidden'));
+
+        if (target === 'home' || target === 'submit') {
+          views.portal.classList.remove('hidden');
+          if (target === 'submit') {
+            const formEl = document.getElementById('complaint-form-section');
+            if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        } else if (views[target]) {
+          views[target].classList.remove('hidden');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        navButtons.forEach((btn) => {
+          const isMatch = btn.getAttribute('data-nav') === target;
+          if (btn.classList.contains('nav-link')) {
+            btn.classList.toggle('active', isMatch);
+          }
+        });
+
+        mobileMenu.classList.add('hidden');
+      }
+
+      navButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          switchView(btn.getAttribute('data-nav'));
+        });
+      });
+
+      brandHomeBtn.addEventListener('click', () => switchView('home'));
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // File upload handling
+      const dropZone = document.getElementById('dropZone');
+      const evidenceInput = document.getElementById('evidenceInput');
+      const fileList = document.getElementById('fileList');
+      let uploadedFiles = [];
+
+      function renderFileList() {
+        fileList.innerHTML = '';
+        uploadedFiles.forEach((file, idx) => {
+          const li = document.createElement('li');
+          li.className = 'flex items-center justify-between bg-slate-100 border border-slate-200 rounded px-2.5 py-1.5 text-slate-700';
+          const sizeKB = Math.max(1, Math.round(file.size / 1024));
+          li.innerHTML = `
+            <span class="truncate pr-2 font-medium">${file.name} <span class="text-slate-400 font-normal">(${sizeKB} KB)</span></span>
+            <button type="button" data-remove="${idx}" class="text-slate-500 hover:text-red-600 font-bold px-1">&times;</button>
+          `;
+          fileList.appendChild(li);
+        });
+      }
+
+      fileList.addEventListener('click', (e) => {
+        const idx = e.target.getAttribute('data-remove');
+        if (idx !== null) {
+          uploadedFiles.splice(Number(idx), 1);
+          renderFileList();
+        }
+      });
+
+      dropZone.addEventListener('click', () => evidenceInput.click());
+      dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('border-[#0D1C42]', 'bg-slate-100');
+      });
+      dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('border-[#0D1C42]', 'bg-slate-100');
+      });
+      dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-[#0D1C42]', 'bg-slate-100');
+        if (e.dataTransfer.files.length) {
+          uploadedFiles = uploadedFiles.concat(Array.from(e.dataTransfer.files));
+          renderFileList();
+        }
+      });
+      evidenceInput.addEventListener('change', (e) => {
+        if (e.target.files.length) {
+          uploadedFiles = uploadedFiles.concat(Array.from(e.target.files));
+          renderFileList();
+          evidenceInput.value = '';
+        }
+      });
+
+      // Form submission & validation
+      const complaintForm = document.getElementById('complaintForm');
+      const formError = document.getElementById('formError');
+      const confirmationModal = document.getElementById('confirmationModal');
+      const modalRefId = document.getElementById('modalRefId');
+      const modalCategory = document.getElementById('modalCategory');
+      const modalTimestamp = document.getElementById('modalTimestamp');
+
+      complaintForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        formError.classList.add('hidden');
+
+        const department = document.getElementById('department').value.trim();
+        const complaintType = document.getElementById('complaintType').value.trim();
+        const personsInvolved = document.getElementById('personsInvolved').value.trim();
+        const incidentDate = document.getElementById('incidentDate').value.trim();
+        const incidentLocation = document.getElementById('incidentLocation').value.trim();
+        const description = document.getElementById('description').value.trim();
+        const confirmed = document.getElementById('confirmAccuracy').checked;
+
+        if (!department || !complaintType || !personsInvolved || !incidentDate || !incidentLocation || !description) {
+          formError.textContent = 'Please complete all required fields marked with an asterisk (*).';
+          formError.classList.remove('hidden');
+          return;
+        }
+        if (!confirmed) {
+          formError.textContent = 'Please confirm that the information provided is accurate to the best of your knowledge.';
+          formError.classList.remove('hidden');
+          return;
+        }
+
+        const refId = 'INT-2026-' + String(Math.floor(842 + Math.random() * 150));
+        const now = new Date();
+        const formattedTime = now.toLocaleString('en-MY', {
+          day: '2-digit', month: 'short', year: 'numeric',
+          hour: '2-digit', minute: '2-digit', hour12: false
+        }) + ' MYT';
+
+        caseStore[refId] = {
+          id: refId,
+          category: complaintType,
+          department: department,
+          submitted: formattedTime,
+          status: 'Received – Pending Review',
+          handler: 'Ely (Company Manager & Compliance Lead)',
+          notes: 'Report logged with ' + uploadedFiles.length + ' supporting file(s). Awaiting initial assessment.'
+        };
+        latestSubmittedId = refId;
+
+        modalRefId.textContent = refId;
+        modalCategory.textContent = complaintType;
+        modalTimestamp.textContent = formattedTime;
+        confirmationModal.classList.remove('hidden');
+      });
+
+      document.getElementById('resetFormBtn').addEventListener('click', () => {
+        complaintForm.reset();
+        uploadedFiles = [];
+        renderFileList();
+        formError.classList.add('hidden');
+      });
+
+      function closeModal() {
+        confirmationModal.classList.add('hidden');
+      }
+      document.getElementById('closeModalX').addEventListener('click', closeModal);
+      document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+      document.getElementById('modalTrackBtn').addEventListener('click', () => {
+        closeModal();
+        document.getElementById('trackInput').value = latestSubmittedId;
+        renderTrackResult(latestSubmittedId);
+        switchView('track');
+      });
+
+      // Track Complaint rendering
+      const trackInput = document.getElementById('trackInput');
+      const trackBtn = document.getElementById('trackBtn');
+      const trackResult = document.getElementById('trackResult');
+
+      function renderTrackResult(refId) {
+        const key = (refId || '').trim().toUpperCase();
+        const record = caseStore[key];
+        if (!record) {
+          trackResult.innerHTML = `
+            <p class="text-sm font-medium text-slate-700">No record found for Reference ID <span class="font-mono font-bold">${key || 'N/A'}</span>. Please verify your reference number and try again.</p>
+          `;
+          return;
+        }
+        trackResult.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3 mb-4">
+            <div>
+              <span class="text-xs text-slate-500 uppercase font-semibold">Case Reference</span>
+              <h2 class="text-lg font-mono font-bold text-[#0D1C42]">${record.id}</h2>
+            </div>
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-[#0D1C42] text-white">${record.status}</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+            <div>
+              <span class="block text-xs text-slate-500">Category</span>
+              <span class="font-semibold text-slate-800">${record.category}</span>
+            </div>
+            <div>
+              <span class="block text-xs text-slate-500">Department</span>
+              <span class="font-semibold text-slate-800">${record.department}</span>
+            </div>
+            <div>
+              <span class="block text-xs text-slate-500">Submitted On</span>
+              <span class="font-medium text-slate-700">${record.submitted}</span>
+            </div>
+            <div>
+              <span class="block text-xs text-slate-500">Assigned Reviewer</span>
+              <span class="font-medium text-slate-700">${record.handler}</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 text-xs text-slate-600">
+            <strong class="text-slate-700">Latest Update:</strong> ${record.notes}
+          </div>
+        `;
+      }
+
+      trackBtn.addEventListener('click', () => renderTrackResult(trackInput.value));
+      renderTrackResult(trackInput.value);
+    })();
+  </script>
+</body>
+</html>
